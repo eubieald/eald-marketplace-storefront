@@ -41,6 +41,8 @@
   --radius-md: calc(var(--radius) - 4px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  --font-poppins: var(--font-poppins), sans-serif;
+  --font-dm-sans: var(--font-dm-sans), sans-serif;
 }
 
 :root {
@@ -118,5 +120,6 @@
   }
   body {
     @apply bg-background text-foreground;
+    @apply font-poppins;
   }
 }
