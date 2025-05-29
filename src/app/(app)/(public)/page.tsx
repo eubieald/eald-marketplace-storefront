@@ -9,6 +9,10 @@ export default async function Home() {
 
   const data = await payload.find({
     collection: collectionSlugs.categories as CollectionSlug,
+    depth: 1, // Load subcategories
+    where: {
+      parent: { exists: false },
+    },
   });
 
   return (
