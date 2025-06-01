@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { DM_Sans, Poppins } from 'next/font/google';
 import './globals.css';
+import { NuqsAdapter } from 'nuqs/adapters/next/app';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -29,7 +30,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={` ${dmSans.variable} ${poppins.variable}  antialiased`}>
-        {children}
+        <NuqsAdapter>{children}</NuqsAdapter>
       </body>
     </html>
   );

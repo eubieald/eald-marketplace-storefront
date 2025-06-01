@@ -17,6 +17,11 @@ export const Categories: CollectionConfig = {
       index: true,
     },
     {
+      name: 'description',
+      type: 'textarea',
+      required: false,
+    },
+    {
       name: 'color',
       type: 'text',
     },
