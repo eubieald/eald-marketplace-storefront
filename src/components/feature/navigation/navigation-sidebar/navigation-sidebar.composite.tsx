@@ -22,7 +22,7 @@ export const NavigationSidebar = ({
   const pathname = usePathname();
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetHeader>
+      <SheetHeader className="hidden lg:flex">
         {/* NOTE: Added this even not used because it is required by sheet component */}
         <SheetTitle />
       </SheetHeader>
