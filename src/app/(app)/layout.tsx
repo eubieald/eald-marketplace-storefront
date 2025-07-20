@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import { DM_Sans, Poppins } from 'next/font/google';
 import './globals.css';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
+import { TRPCReactProvider } from '@/trpc/client';
+import { Suspense } from 'react';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -28,9 +30,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${poppins.variable} ${dmSans.variable}`}>
       <body className={` ${dmSans.variable} ${poppins.variable}  antialiased`}>
-        <NuqsAdapter>{children}</NuqsAdapter>
+        <Suspense fallback={<div>Loading...</div>}>
+          <NuqsAdapter>
+            <TRPCReactProvider>{children}</TRPCReactProvider>
+          </NuqsAdapter>
+        </Suspense>
       </body>
     </html>
   );

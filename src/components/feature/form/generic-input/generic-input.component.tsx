@@ -60,6 +60,9 @@ export const GenericInput = <T extends FieldValues>({
         return (
           <FormItem className={cn('', formItemProps?.className)}>
             <div className="relative w-full">
+              <label className="text-sm font-medium text-neutral-700">
+                {label}
+              </label>
               <FormControl>
                 <Input
                   {...field}

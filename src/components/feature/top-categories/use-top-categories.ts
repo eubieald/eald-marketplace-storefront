@@ -28,5 +28,6 @@ export function useTopCategories() {
   return {
     openCategoryId,
     handleToggle,
+    useIsTouchDevice,
   };
 }

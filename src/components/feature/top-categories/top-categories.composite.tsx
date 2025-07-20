@@ -1,7 +1,6 @@
 'use client';
 
 import { Category } from '@/payload-types';
-import { TopCategoriesBlockProps } from './top-categories.types';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -11,19 +10,23 @@ import {
   NavigationMenuTrigger,
 } from '@/components/ui/navigation-menu';
 import Link from 'next/link';
-import { getUniqueId } from '@/lib/utils';
+import { cn, getUniqueId } from '@/lib/utils';
 import { TopCategoriesViewAll } from './top-categories.component';
+import { useTRPC } from '@/trpc/client';
+import { useSuspenseQuery } from '@tanstack/react-query';
+import { CommonProps } from '@/lib/types';
 
-export const TopCategoriesBlock = ({
-  data,
-}: TopCategoriesBlockProps & {
-  className?: string;
-}) => {
+export const TopCategoriesBlock = ({ className = '' }: CommonProps) => {
+  const trpc = useTRPC();
+  const { data: TopLevelWithChildrenOutputType } = useSuspenseQuery(
+    trpc.categories.getTopLevelWithChildren.queryOptions()
+  );
+
   return (
-    <div className="relative px-5 flex flex-col gap-4">
+    <div className={cn('relative px-5 flex flex-col gap-4', className)}>
       <NavigationMenu viewport={false}>
         <NavigationMenuList className="flex flex-wrap gap-2 lg:gap-4">
-          {data.map((category: Category) => (
+          {TopLevelWithChildrenOutputType?.docs?.map((category) => (
             <NavigationMenuItem key={getUniqueId(category?.id)}>
               <NavigationMenuTrigger
                 className="w-[9.375rem] lg:w-[18.75rem] px-2 py-2"
@@ -37,8 +40,14 @@ export const TopCategoriesBlock = ({
               </NavigationMenuTrigger>
               {Array.isArray(category?.subcategories) &&
                 category.subcategories.length > 0 && (
-                  <NavigationMenuContent className="absolute left-0 top-full z-50 lg:w-[18.75rem] w-[9.375rem] rounded-lg border bg-popover p-4 shadow-md">
+                  <NavigationMenuContent className="absolute top-full z-50 w-[12.5rem] max-w-[90vw] lg:w-[18.75rem] lg:left-0 left-1/2 -translate-x-1/2 lg:translate-x-0 rounded-lg border bg-popover p-4 shadow-md">
                     <ul className="grid gap-2">
+                      <Link
+                        href={`/categories/${category?.slug}`}
+                        className="font-semibold text-lg"
+                      >
+                        {category?.name}
+                      </Link>
                       {category.subcategories.map((subCategory: Category) => (
                         <li
                           key={getUniqueId(subCategory?.id)}
@@ -59,9 +68,11 @@ export const TopCategoriesBlock = ({
                               <div className="font-medium line-clamp-1">
                                 {subCategory?.name}
                               </div>
-                              <div className="text-muted-foreground">
-                                {subCategory?.description}
-                              </div>
+                              {subCategory?.description && (
+                                <div className="text-xs text-muted-foreground line-clamp-2">
+                                  {subCategory?.description}
+                                </div>
+                              )}
                             </Link>
                           </NavigationMenuLink>
                         </li>

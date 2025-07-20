@@ -6,28 +6,30 @@ import { Navigation } from '@/components/feature/navigation';
 import { QuickSearch } from '@/components/feature/quicksearch/quicksearch.component';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
-import {
-  CustomCategory,
-  getTopCategories,
-  TopCategoriesBlock,
-} from '@/components/feature/top-categories';
-import { Category } from '@/payload-types';
+import { TopCategoriesBlock } from '@/components/feature/top-categories';
+import { getQueryClient, trpc } from '@/trpc/server';
+import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
+import { Suspense } from 'react';
 
 const PublicLayout = async ({ children }: { children: React.ReactNode }) => {
-  const data = await getTopCategories();
-  const formattedData: CustomCategory[] = data?.docs?.map((doc) => {
-    const categoryDoc = doc as Category;
-    return {
-      ...categoryDoc,
-      subcategories: (categoryDoc?.subcategories?.docs ?? [])?.map(
-        (subDoc) => ({
-          // Note: Because of depth: 1, we can safely assume subcategories are not nested further
-          ...(subDoc as Category),
-          subcategories: undefined, // Note: Prevent deep nesting
-        })
-      ),
-    };
-  });
+  // This is a server component, so we can prefetch data here
+  const queryclient = getQueryClient();
+  await queryclient.prefetchQuery(trpc.categories.getTopLevelWithChildren.queryOptions());
+
+  // const data = await getTopCategories();
+  // const formattedData: CustomCategory[] = data?.docs?.map((doc) => {
+  //   const categoryDoc = doc as Category;
+  //   return {
+  //     ...categoryDoc,
+  //     subcategories: (categoryDoc?.subcategories?.docs ?? [])?.map(
+  //       (subDoc) => ({
+  //         // Note: Because of depth: 1, we can safely assume subcategories are not nested further
+  //         ...(subDoc as Category),
+  //         subcategories: undefined, // Note: Prevent deep nesting
+  //       })
+  //     ),
+  //   };
+  // });
 
   return (
     <>
@@ -40,7 +42,12 @@ const PublicLayout = async ({ children }: { children: React.ReactNode }) => {
         <Navigation />
       </Header>
       <QuickSearch />
-      <TopCategoriesBlock data={formattedData} />
+      <HydrationBoundary state={dehydrate(queryclient)}>
+        <Suspense fallback={<div>Loading...</div>}>
+          <TopCategoriesBlock />
+        </Suspense>
+      </HydrationBoundary>
+
       <main className="flex-grow">{children}</main>
     </>
   );
