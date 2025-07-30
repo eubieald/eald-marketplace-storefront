@@ -12,10 +12,17 @@ import { MenuIcon } from 'lucide-react';
 import { AuthenticationButtonGroup } from '../authentication/authentication-button-group';
 import { NavigationBlock, NavigationItem } from './navigation.component';
 import { cn } from '@/lib/utils';
+import { AuthResultSessionOutput } from '@/lib/auth/types';
 
-export const Navigation = ({ className }: CommonProps) => {
+export const Navigation = ({
+  className,
+  session,
+}: CommonProps & {
+  session: AuthResultSessionOutput;
+}) => {
   const pathname = usePathname();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
   return (
     <>
       <WrapperDesktopBlock>
@@ -38,14 +45,21 @@ export const Navigation = ({ className }: CommonProps) => {
               </NavigationItem>
             ))}
           </NavigationBlock>
-
           <AuthenticationButtonGroup>
-            <AuthenticationButtonGroup.Login className="border-l bg-white border-y-0 px-12 h-full rounded-none hover:bg-cyan-400 transition-colors text-lg">
-              <Link href="/login">Login</Link>
-            </AuthenticationButtonGroup.Login>
-            <AuthenticationButtonGroup.Register className="border-r border-y-0 px-12 border-l-0 h-full bg-black text-white hover:text-black rounded-none hover:bg-cyan-400 transition-colors text-lg">
-              <Link href="/register">Register</Link>
-            </AuthenticationButtonGroup.Register>
+            {!session?.user ? (
+              <>
+                <AuthenticationButtonGroup.Login className="border-l bg-white border-y-0 px-12 h-full rounded-none hover:bg-cyan-400 transition-colors text-lg">
+                  <Link href="/login">Login</Link>
+                </AuthenticationButtonGroup.Login>
+                <AuthenticationButtonGroup.Register className="border-r border-y-0 px-12 border-l-0 h-full bg-black text-white hover:text-black rounded-none hover:bg-cyan-400 transition-colors text-lg">
+                  <Link href="/register">Register</Link>
+                </AuthenticationButtonGroup.Register>
+              </>
+            ) : (
+              <AuthenticationButtonGroup.Dashboard className="border-r border-y-0 px-12 border-l-0 h-full bg-black text-white hover:text-black rounded-none hover:bg-cyan-400 transition-colors text-lg">
+                <Link href="/dashboard">Dashboard</Link>
+              </AuthenticationButtonGroup.Dashboard>
+            )}
           </AuthenticationButtonGroup>
         </nav>
       </WrapperDesktopBlock>

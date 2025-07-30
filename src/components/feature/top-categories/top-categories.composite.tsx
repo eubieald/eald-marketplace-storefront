@@ -19,7 +19,7 @@ import { CommonProps } from '@/lib/types';
 export const TopCategoriesBlock = ({ className = '' }: CommonProps) => {
   const trpc = useTRPC();
   const { data: TopLevelWithChildrenOutputType } = useSuspenseQuery(
-    trpc.categories.getTopLevelWithChildren.queryOptions()
+    trpc?.categories?.getTopLevelWithChildren?.queryOptions()
   );
 
   return (

@@ -10,11 +10,13 @@ export const Test = ({ className }: CommonProps) => {
   const categories = useQuery(
     trpc.categories.getTopLevelWithChildren.queryOptions()
   );
+  const session = useQuery(trpc.auth.session.queryOptions());
 
   return (
     <div className={cn('test-component', className)}>
       <p>is loading: {categories.isLoading}</p>
-      <div>{JSON.stringify(categories.data, null, 2)}</div>
+      {/* <div>{JSON.stringify(categories.data, null, 2)}</div> */}
+      <div>{JSON.stringify(session.data?.user, null, 2)}</div>
     </div>
   );
 };

@@ -39,5 +39,24 @@ const AuthenticationButtonRegister = ({ className, children }: CommonProps) => {
   );
 };
 
+const AuthenticationButtonDashboard = ({
+  className,
+  children,
+}: CommonProps) => {
+  return (
+    <Button
+      asChild
+      variant="secondary"
+      className={cn(
+        'flex justify-start lg:justify-normal rounded-none border-none bg-transparent text-sm font-normal',
+        className
+      )}
+    >
+      {children}
+    </Button>
+  );
+};
+
 AuthenticationButtonGroup.Login = AuthenticationButtonLogin;
 AuthenticationButtonGroup.Register = AuthenticationButtonRegister;
+AuthenticationButtonGroup.Dashboard = AuthenticationButtonDashboard;

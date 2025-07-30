@@ -18,7 +18,11 @@ export default async function Page({ searchParams }: PageProps) {
   // Note: To use prefetchQuery we need to use React Query hydration (<Hydrate>)
   const queryclient = getQueryClient();
   const categoriesData: GetPaginatedOutputType = await queryclient.fetchQuery(
-    trpc.categories.getPaginated.queryOptions({ page, limit: pageSize })
+    trpc.categories.getPaginated.queryOptions({
+      page,
+      limit: pageSize,
+      includeChildren: false,
+    })
   );
 
   return (

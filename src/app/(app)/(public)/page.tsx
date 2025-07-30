@@ -1,4 +1,5 @@
 /*
+// EXAMPLE USE CASE
 // NOTE: This is a server sample page that uses tRPC to fetch data
 "use server"
 

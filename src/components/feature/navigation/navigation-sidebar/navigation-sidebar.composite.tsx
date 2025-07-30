@@ -26,7 +26,7 @@ export const NavigationSidebar = ({
         {/* NOTE: Added this even not used because it is required by sheet component */}
         <SheetTitle />
       </SheetHeader>
-      <SheetContent side="left" className="p-0 transition-none">
+      <SheetContent side="left" className="p-0 transition-none lg:hidden">
         <ScrollArea className="h-full">
           <NavigationBlock className="flex-col gap-2 p-4">
             {items.map((item, index) => (

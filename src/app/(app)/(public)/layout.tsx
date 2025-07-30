@@ -10,26 +10,15 @@ import { TopCategoriesBlock } from '@/components/feature/top-categories';
 import { getQueryClient, trpc } from '@/trpc/server';
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 import { Suspense } from 'react';
+import { caller } from '@/trpc/server';
 
 const PublicLayout = async ({ children }: { children: React.ReactNode }) => {
-  // This is a server component, so we can prefetch data here
+  // NOTE: This is a server component, so we can prefetch data here
   const queryclient = getQueryClient();
-  await queryclient.prefetchQuery(trpc.categories.getTopLevelWithChildren.queryOptions());
-
-  // const data = await getTopCategories();
-  // const formattedData: CustomCategory[] = data?.docs?.map((doc) => {
-  //   const categoryDoc = doc as Category;
-  //   return {
-  //     ...categoryDoc,
-  //     subcategories: (categoryDoc?.subcategories?.docs ?? [])?.map(
-  //       (subDoc) => ({
-  //         // Note: Because of depth: 1, we can safely assume subcategories are not nested further
-  //         ...(subDoc as Category),
-  //         subcategories: undefined, // Note: Prevent deep nesting
-  //       })
-  //     ),
-  //   };
-  // });
+  await queryclient.prefetchQuery(
+    trpc.categories.getTopLevelWithChildren.queryOptions()
+  );
+  const session = await caller.auth.session();
 
   return (
     <>
@@ -39,7 +28,9 @@ const PublicLayout = async ({ children }: { children: React.ReactNode }) => {
             EALD EC
           </HeaderLogo>
         </Link>
-        <Navigation />
+        <Suspense fallback={<div>Loading navigation...</div>}>
+          <Navigation className="flex-1" session={session} />
+        </Suspense>
       </Header>
       <QuickSearch />
       <HydrationBoundary state={dehydrate(queryclient)}>

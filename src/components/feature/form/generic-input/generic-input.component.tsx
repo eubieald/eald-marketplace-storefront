@@ -2,6 +2,7 @@ import {
   FormControl,
   FormField,
   FormItem,
+  FormLabel,
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
@@ -9,7 +10,7 @@ import { useState } from 'react';
 import { FieldValues, Path, UseFormReturn } from 'react-hook-form';
 import Image from 'next/image';
 import Eye from '@/public/icons/eye.svg';
-import EyeClose from '@/public/icons/eye-close.svg';
+import EyeSlash from '@/public/icons/eye-slash.svg';
 import IconSearch from '@/public/icons/search.svg';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
@@ -28,6 +29,7 @@ export type GenericInputProps<T extends FieldValues> = {
   };
   label: string;
   icon?: React.ReactNode;
+  isRequired?: boolean;
   notes?: string;
   onChange?: (value: string) => void;
   onBlur?: () => void;
@@ -39,6 +41,7 @@ export const GenericInput = <T extends FieldValues>({
   inputProps,
   formItemProps,
   icon,
+  isRequired = false,
   notes = '',
   // TODO: uncomment once this will be implemented
   // onChange,
@@ -59,10 +62,8 @@ export const GenericInput = <T extends FieldValues>({
       render={({ field }) => {
         return (
           <FormItem className={cn('', formItemProps?.className)}>
+            <FormLabel>{label}</FormLabel>
             <div className="relative w-full">
-              <label className="text-sm font-medium text-neutral-700">
-                {label}
-              </label>
               <FormControl>
                 <Input
                   {...field}
@@ -108,7 +109,11 @@ export const GenericInputPassword = <T extends FieldValues>(
           onClick={() => setShowPassword(!showPassword)}
           className="absolute top-1/2 right-[1rem] -translate-y-1/2 transform cursor-pointer p-0 hover:bg-transparent"
         >
-          <Image alt="password toggle" src={showPassword ? Eye : EyeClose} />
+          <Image
+            alt="password toggle"
+            src={showPassword ? Eye : EyeSlash}
+            className="size-4 border-0"
+          />
         </Button>
       }
     />
