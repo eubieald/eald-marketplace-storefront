@@ -48,7 +48,7 @@ export const TopCategoriesBlock = ({ className = '' }: CommonProps) => {
                       >
                         {category?.name}
                       </Link>
-                      {category.subcategories.map((subCategory: Category) => (
+                      {category?.subcategories?.map((subCategory: Category) => (
                         <li
                           key={getUniqueId(subCategory?.id)}
                           className="rounded-lg"
