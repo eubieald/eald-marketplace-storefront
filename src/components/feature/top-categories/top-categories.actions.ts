@@ -1,9 +1,9 @@
 // app/actions/getTopCategories.ts
 
 'use server';
-import { getPayload } from 'payload';
+import { CollectionSlug, getPayload } from 'payload';
 import configPromise from '@payload-config';
-import { CollectionSlug, collectionSlugs } from '@/collections';
+import { collectionSlugs } from '@/collections';
 
 export const getTopCategories = async () => {
   const payload = await getPayload({ config: configPromise });

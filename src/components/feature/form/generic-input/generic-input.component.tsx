@@ -41,7 +41,6 @@ export const GenericInput = <T extends FieldValues>({
   inputProps,
   formItemProps,
   icon,
-  isRequired = false,
   notes = '',
   // TODO: uncomment once this will be implemented
   // onChange,

@@ -4,6 +4,9 @@ import { COLOR } from '@/components/feature/color-picker/color-picker.utils';
 
 export const Categories: CollectionConfig = {
   slug: collectionSlugs.categories,
+  admin: {
+    useAsTitle: 'name',
+  },
   fields: [
     {
       name: 'name',

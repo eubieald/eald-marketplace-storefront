@@ -42,11 +42,18 @@ export const authRouter = createTRPCRouter({
         }
 
         await setAuthCookie(ctx, data.token);
-      } catch (error: any) {
-        throw new TRPCError({
-          code: 'BAD_REQUEST',
-          message: error?.data?.errors?.[0]?.message || 'Registration failed',
-        });
+      } catch (error) {
+        if (error instanceof Error) {
+          throw new TRPCError({
+            code: 'UNAUTHORIZED',
+            message: error.message,
+          });
+        } else {
+          throw new TRPCError({
+            code: 'UNAUTHORIZED',
+            message: 'Login after registration failed',
+          });
+        }
       }
     }),
 

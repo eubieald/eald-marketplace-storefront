@@ -18,16 +18,14 @@ export default async function Page() {
 }
   */
 
-// NOTE: This is a client sample page that uses tRPC to fetch data
-'use client';
-import { Suspense } from 'react';
+export const dynamic = 'force-dynamic';
+
 import { Test } from './categories/_components/test.component';
+
 export default function Page() {
   return (
     <div className="prose prose-lg max-w-none">
-      <Suspense fallback={<div>Loading categories...</div>}>
-        <Test className="mb-4" />
-      </Suspense>
+      <Test className="mb-4" />
     </div>
   );
 }

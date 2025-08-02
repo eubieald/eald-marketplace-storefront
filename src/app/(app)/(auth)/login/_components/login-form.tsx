@@ -13,6 +13,7 @@ import {
   GenericInputPassword,
 } from '@/components/feature/form/generic-input';
 import { useLoginForm } from './use-login';
+import Link from 'next/link';
 
 export const LoginForm = ({ className = '' }: CommonProps) => {
   const { onSubmit, isLoading } = useLoginForm();
@@ -51,12 +52,10 @@ export const LoginForm = ({ className = '' }: CommonProps) => {
           </div>
         </form>
       </Form>
-      <p className="text-center text-sm text-gray-500 mt-4">
-        Don't have an account?{' '}
-        <a href="/register" className="text-blue-500">
-          Register here
-        </a>
-      </p>
+      <div className="text-center text-sm text-gray-500 mt-4">
+        <span>Don&apos;t have an account? </span>
+        <Link href="/register">Register here</Link>
+      </div>
     </div>
   );
 };

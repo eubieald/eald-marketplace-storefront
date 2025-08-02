@@ -1,3 +1,6 @@
+// Force dynamic rendering since we're using headers() in auth.session()
+export const dynamic = 'force-dynamic';
+
 import {
   Header,
   HeaderLogo,
@@ -11,6 +14,7 @@ import { getQueryClient, trpc } from '@/trpc/server';
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 import { Suspense } from 'react';
 import { caller } from '@/trpc/server';
+import { Spinner } from '@/components/feature/spinner';
 
 const PublicLayout = async ({ children }: { children: React.ReactNode }) => {
   // NOTE: This is a server component, so we can prefetch data here
@@ -28,13 +32,13 @@ const PublicLayout = async ({ children }: { children: React.ReactNode }) => {
             EALD EC
           </HeaderLogo>
         </Link>
-        <Suspense fallback={<div>Loading navigation...</div>}>
+        <Suspense fallback={<Spinner />}>
           <Navigation className="flex-1" session={session} />
         </Suspense>
       </Header>
       <QuickSearch />
       <HydrationBoundary state={dehydrate(queryclient)}>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<Spinner />}>
           <TopCategoriesBlock />
         </Suspense>
       </HydrationBoundary>

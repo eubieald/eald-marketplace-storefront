@@ -42,12 +42,14 @@ export const TopCategoriesBlock = ({ className = '' }: CommonProps) => {
                 category.subcategories.length > 0 && (
                   <NavigationMenuContent className="absolute top-full z-50 w-[12.5rem] max-w-[90vw] lg:w-[18.75rem] lg:left-0 left-1/2 -translate-x-1/2 lg:translate-x-0 rounded-lg border bg-popover p-4 shadow-md">
                     <ul className="grid gap-2">
-                      <Link
-                        href={`/categories/${category?.slug}`}
-                        className="font-semibold text-lg"
-                      >
-                        {category?.name}
-                      </Link>
+                      <NavigationMenuLink className="hover:bg-blue-300" asChild>
+                        <Link
+                          href={`/categories/${category?.slug}`}
+                          className="px-2 font-semibold text-lg "
+                        >
+                          {category?.name}
+                        </Link>
+                      </NavigationMenuLink>
                       {category?.subcategories?.map((subCategory: Category) => (
                         <li
                           key={getUniqueId(subCategory?.id)}

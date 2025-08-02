@@ -4,6 +4,7 @@ import './globals.css';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
 import { TRPCReactProvider } from '@/trpc/client';
 import { Suspense } from 'react';
+import { Spinner } from '@/components/feature/spinner';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -32,7 +33,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${poppins.variable} ${dmSans.variable}`}>
       <body className={` ${dmSans.variable} ${poppins.variable}  antialiased`}>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<Spinner />}>
           <NuqsAdapter>
             <TRPCReactProvider>{children}</TRPCReactProvider>
           </NuqsAdapter>
