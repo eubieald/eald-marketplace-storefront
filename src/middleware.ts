@@ -1,4 +1,3 @@
-// middleware.ts
 import { NextResponse, type NextRequest } from 'next/server';
 import { AUTH_COOKIE } from './modules/auth/constants';
 
@@ -18,9 +17,14 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/login', request.url));
   }
 
-  return NextResponse.next();
+  // NOTE: Always inject x-current-path Header
+  const response = NextResponse.next();
+  response.headers.set('x-current-path', pathname);
+
+  return response;
 }
 
+// NOTE: Update matcher to include ALL PAGES
 export const config = {
-  matcher: ['/login', '/register', '/dashboard/:path*'],
+  matcher: ['/((?!api|_next|static|.*\\..*).*)'],
 };

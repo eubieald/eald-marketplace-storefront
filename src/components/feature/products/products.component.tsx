@@ -19,8 +19,8 @@ export const ProductList = ({
   );
 
   return (
-    <div className={cn('product-list', className)}>
+    <pre className={cn('product-list', className)}>
       {JSON.stringify(data, null, 2)}
-    </div>
+    </pre>
   );
 };

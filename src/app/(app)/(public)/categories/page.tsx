@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { Column, ColumnRowItem } from '@/components/feature/common/column';
 import { Categories } from './_components';
 import { Pagination } from '@/components/feature/pagination';

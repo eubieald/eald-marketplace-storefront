@@ -16,11 +16,13 @@ import { AuthResultSessionOutput } from '@/lib/auth/types';
 
 export const Navigation = ({
   className,
-  session,
+  headerProps,
 }: CommonProps & {
-  session: AuthResultSessionOutput;
+  headerProps?: {
+    session: AuthResultSessionOutput;
+    pathname?: string;
+  };
 }) => {
-  const pathname = usePathname();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
@@ -38,7 +40,9 @@ export const Navigation = ({
                 key={index}
                 href={item.href}
                 isActive={
-                  pathname === item.href || pathname.startsWith(item.href)
+                  headerProps?.pathname !== undefined &&
+                  (headerProps?.pathname === item?.href ||
+                    headerProps?.pathname.startsWith(item?.href))
                 }
               >
                 {item.title}
@@ -46,7 +50,7 @@ export const Navigation = ({
             ))}
           </NavigationBlock>
           <AuthenticationButtonGroup>
-            {!session?.user ? (
+            {!headerProps?.session?.user ? (
               <>
                 <AuthenticationButtonGroup.Login className="border-l bg-white border-y-0 px-12 h-full rounded-none hover:bg-cyan-400 transition-colors text-lg">
                   <Link href="/login">Login</Link>

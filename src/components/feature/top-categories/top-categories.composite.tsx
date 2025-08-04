@@ -33,6 +33,16 @@ export const TopCategoriesBlock = ({ className = '' }: CommonProps) => {
                 style={{
                   backgroundColor: category?.bgColor || 'transparent',
                 }}
+                onMouseDown={(e) => {
+                  if (window?.innerWidth >= 1024) {
+                    e.preventDefault();
+                  }
+                }}
+                onClick={(e) => {
+                  if (window?.innerWidth >= 1024) {
+                    e.preventDefault();
+                  }
+                }}
               >
                 <div className="w-full text-center truncate">
                   {category?.name}
