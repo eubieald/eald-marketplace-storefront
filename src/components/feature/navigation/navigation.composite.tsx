@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import { CommonProps } from '@/lib/types';
 import { headerNavLinks } from '../header';
-import { usePathname } from 'next/navigation';
 import { WrapperDesktopBlock, WrapperMobileBlock } from '../common';
 import { Button } from '@/components/ui/button';
 import { NavigationSidebar } from './navigation-sidebar';

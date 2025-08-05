@@ -15,18 +15,21 @@ import { TopCategoriesViewAll } from './top-categories.component';
 import { useTRPC } from '@/trpc/client';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { CommonProps } from '@/lib/types';
+import { TopCategoriesDocType } from '@/modules/categories';
 
 export const TopCategoriesBlock = ({ className = '' }: CommonProps) => {
   const trpc = useTRPC();
-  const { data: TopLevelWithChildrenOutputType } = useSuspenseQuery(
+  const { data } = useSuspenseQuery(
     trpc?.categories?.getTopLevelWithChildren?.queryOptions()
   );
+
+  const topCategoriesData = data?.docs as TopCategoriesDocType[];
 
   return (
     <div className={cn('relative px-5 flex flex-col gap-4', className)}>
       <NavigationMenu viewport={false}>
         <NavigationMenuList className="flex flex-wrap gap-2 lg:gap-4">
-          {TopLevelWithChildrenOutputType?.docs?.map((category) => (
+          {topCategoriesData?.map((category) => (
             <NavigationMenuItem key={getUniqueId(category?.id)}>
               <NavigationMenuTrigger
                 className="w-[9.375rem] lg:w-[18.75rem] px-2 py-2"
@@ -49,7 +52,7 @@ export const TopCategoriesBlock = ({ className = '' }: CommonProps) => {
                 </div>
               </NavigationMenuTrigger>
               {Array.isArray(category?.subcategories) &&
-                category.subcategories.length > 0 && (
+                category?.subcategories?.length > 0 && (
                   <NavigationMenuContent className="absolute top-full z-50 w-[12.5rem] max-w-[90vw] lg:w-[18.75rem] lg:left-0 left-1/2 -translate-x-1/2 lg:translate-x-0 rounded-lg border bg-popover p-4 shadow-md">
                     <ul className="grid gap-2">
                       <NavigationMenuLink className="hover:bg-blue-300" asChild>

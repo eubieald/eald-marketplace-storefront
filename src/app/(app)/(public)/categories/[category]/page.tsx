@@ -1,4 +1,6 @@
-import { ProductList } from '@/components/feature/products';
+import { Column, ColumnItem } from '@/components/feature/common/column';
+import { ProductFilters } from '@/components/feature/product-filters';
+import { ProductList } from '@/components/feature/product-list';
 import { Spinner } from '@/components/feature/spinner';
 import { getQueryClient, trpc } from '@/trpc/server';
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
@@ -20,11 +22,16 @@ export default async function Page({ params }: PageProps) {
     <>
       <h1 className="text-2xl font-bold">Category: {category}</h1>
       <br />
-      <HydrationBoundary state={dehydrate(queryClient)}>
-        <Suspense fallback={<Spinner />}>
-          <ProductList category={category} />
-        </Suspense>
-      </HydrationBoundary>
+      <Column className="flex flex-col gap-4">
+        <ColumnItem className="flex flex-row gap-10 w-full p-4 items-start">
+          <HydrationBoundary state={dehydrate(queryClient)}>
+            <ProductFilters className="border p-2 w-full max-w-65 h-full self-start" />
+            <Suspense fallback={<Spinner />}>
+              <ProductList category={category} />
+            </Suspense>
+          </HydrationBoundary>
+        </ColumnItem>
+      </Column>
     </>
   );
 }

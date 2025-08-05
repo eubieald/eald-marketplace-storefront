@@ -3,7 +3,6 @@ import { NavigationItemProps } from './navigation.types';
 import { cn } from '@/lib/utils';
 import { CommonProps } from '@/lib/types';
 import { WrapperDesktopBlock, WrapperMobileBlock } from '../common';
-import { Button } from '@/components/ui/button';
 import { MenuIcon } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { AuthenticationButtonGroup } from '../authentication';
@@ -45,7 +44,7 @@ export const NavigationSkeleton = ({ className }: { className?: string }) => {
         >
           <NavigationBlock className="gap-4 items-center">
             {Array.from({ length: 4 }).map((_, index) => (
-              <NavigationItem key={index} href="#" isActive={false}>
+              <NavigationItem key={index} href="/" isActive={false}>
                 <Skeleton className="h-4 w-16 rounded" />
               </NavigationItem>
             ))}

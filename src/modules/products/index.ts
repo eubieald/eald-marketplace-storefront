@@ -1,5 +1,4 @@
 export * from './types';
-export * from './utils';
 
 // NOTE: Export folders
 export * from './server';

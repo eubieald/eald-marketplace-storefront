@@ -25,6 +25,14 @@ export const formatCategory = (
   })),
 });
 
+/**
+ * Given a category slug, find the category and its subcategories, and return an
+ * array of slugs containing the category slug and all its subcategory slugs.
+ *
+ * @param ctx - The payload context object, containing the database client.
+ * @param categorySlug - The slug of the category to find.
+ * @returns An array of slugs, containing the category slug and all its subcategory slugs.
+ */
 export const getCategoryWithSubSlugs = async (
   ctx: { db: BasePayload },
   categorySlug: string

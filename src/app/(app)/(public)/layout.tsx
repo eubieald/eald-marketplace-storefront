@@ -34,12 +34,7 @@ const PublicLayout = async ({ children }: { children: React.ReactNode }) => {
             EALD EC
           </HeaderLogo>
         </Link>
-        {/* <Suspense fallback={<Spinner />}>
-          <Navigation className="flex-1" session={session} />
-        </Suspense> */}
-        <Suspense>
-          <NavigationBoundaryClient pathname={pathname || ''} />
-        </Suspense>
+        <NavigationBoundaryClient pathname={pathname || ''} />
       </Header>
       <QuickSearch />
       <HydrationBoundary state={dehydrate(queryclient)}>
