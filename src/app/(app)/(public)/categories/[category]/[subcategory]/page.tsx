@@ -1,14 +1,17 @@
-import { ProductList } from '@/components/feature/products';
+import { ProductList } from '@/components/feature/product-list';
 import { Spinner } from '@/components/feature/spinner';
 import { getQueryClient, trpc } from '@/trpc/server';
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 import { Suspense } from 'react';
+import { loadProductFilters } from '@/modules/products';
+import { SearchParams } from 'nuqs/server';
 
 type PageProps = {
   params: Promise<{ category: string; subcategory: string }>;
+  searchParams: Promise<SearchParams>;
 };
 
-export default async function Page({ params }: PageProps) {
+export default async function Page({ params, searchParams }: PageProps) {
   const { category, subcategory } = await params;
   const queryClient = getQueryClient();
   await queryClient.prefetchQuery(

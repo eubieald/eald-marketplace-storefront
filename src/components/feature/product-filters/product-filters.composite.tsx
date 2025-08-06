@@ -14,6 +14,7 @@ import { Input } from '@/components/ui/input';
 import { formatAsCurrency } from './product-filters.utils';
 import { useProductsFilters } from '@/modules/products/hooks/use-products-filters';
 import { usePriceFilterOption } from './use-price-option';
+import { Button } from '@/components/ui/button';
 
 export const ProductFilters = ({ className }: CommonProps) => {
   const [filters, setFilters] = useProductsFilters();
@@ -34,7 +35,16 @@ export const ProductFilters = ({ className }: CommonProps) => {
 
   return (
     <div className={cn('', className)}>
-      <h2 className="text-2xl font-bold">Product Filters</h2>
+      <Column className="flex flex-row justify-between gap-2">
+        <h2 className="text-sm font-bold text-black">Product Filters</h2>
+        <Button
+          variant="ghost"
+          className="text-xs border-0 bg-transparent text-black"
+          onClick={() => setFilters({ minPrice: '', maxPrice: '' })}
+        >
+          Reset Filters
+        </Button> 
+      </Column>
       <Accordion
         type="single"
         collapsible
@@ -47,7 +57,7 @@ export const ProductFilters = ({ className }: CommonProps) => {
             <ProductFiltersOptions.Price>
               <Column className="flex items-start flex-col gap-2">
                 <h3>Price</h3>
-                <ColumnItem className="flex flex-col gap-2">
+                <ColumnItem className="flex flex-col gap-2 w-full">
                   <h3>Minimum Price:</h3>
                   <Input
                     type="text"
@@ -56,7 +66,7 @@ export const ProductFilters = ({ className }: CommonProps) => {
                     onChange={handleMinPriceChange}
                   />
                 </ColumnItem>
-                <ColumnItem className="flex flex-col gap-2">
+                <ColumnItem className="flex flex-col gap-2 w-full">
                   <h3>Maximum Price:</h3>
                   <Input
                     type="text"

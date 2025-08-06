@@ -6,6 +6,7 @@ import { Product } from '@/payload-types';
 import { useTRPC } from '@/trpc/client';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { ProductListItem } from './product-list.component';
+import { useProductsFilters } from '@/modules/products/hooks/use-products-filters';
 
 export const ProductList = ({
   className,
@@ -14,9 +15,11 @@ export const ProductList = ({
   category?: string;
 }) => {
   const trpc = useTRPC();
+  const [filters] = useProductsFilters();
   const { data: productData } = useSuspenseQuery(
     trpc.products.getAll.queryOptions({
       category,
+      ...filters,
     })
   );
   const products = productData?.docs as Product[];

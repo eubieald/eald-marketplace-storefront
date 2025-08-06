@@ -2,22 +2,32 @@ import { Column, ColumnItem } from '@/components/feature/common/column';
 import { ProductFilters } from '@/components/feature/product-filters';
 import { ProductList } from '@/components/feature/product-list';
 import { Spinner } from '@/components/feature/spinner';
+import { loadProductFilters } from '@/modules/products';
 import { getQueryClient, trpc } from '@/trpc/server';
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
+import { SearchParams } from 'nuqs/server';
 import { Suspense } from 'react';
 
 type PageProps = {
   params: Promise<{ category: string }>;
+  searchParams: Promise<{
+    minPrice: string;
+    maxPrice: string;
+  }>;
 };
 
-export default async function Page({ params }: PageProps) {
+export default async function Page({ params, searchParams }: PageProps) {
+  const filters = await loadProductFilters(searchParams);
   const { category } = await params;
+
   const queryClient = getQueryClient();
   await queryClient.prefetchQuery(
     trpc.products.getAll.queryOptions({
       category,
+      ...filters,
     })
   );
+
   return (
     <>
       <h1 className="text-2xl font-bold">Category: {category}</h1>
