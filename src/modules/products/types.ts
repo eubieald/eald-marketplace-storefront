@@ -10,4 +10,5 @@ export type ProductsQueryFilterType = {
   category?: string | null;
   minPrice?: string | null;
   maxPrice?: string | null;
+  tags?: string[] | null;
 };

@@ -1,1 +1,1 @@
-export * from './use-products-filters';
+export * from './use-products-filters.config';

@@ -1,5 +1,5 @@
 import { useQueryStates } from 'nuqs';
-import { parseAsString, createLoader } from 'nuqs/server';
+import { parseAsString, createLoader, parseAsArrayOf } from 'nuqs/server';
 
 export const params = {
   minPrice: parseAsString.withOptions({
@@ -9,9 +9,13 @@ export const params = {
   maxPrice: parseAsString.withOptions({
     clearOnDefault: true,
   }),
+
+  tags: parseAsArrayOf(parseAsString).withOptions({
+    clearOnDefault: true,
+  }),
 };
 
-export const useProductsFilters = () => {
+export const useProductsFiltersConfig = () => {
   return useQueryStates(params);
 };
 

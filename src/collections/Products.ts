@@ -3,6 +3,9 @@ import { collectionSlugs } from './collections.utils';
 
 export const Products: CollectionConfig = {
   slug: collectionSlugs.products,
+  admin: {
+    useAsTitle: 'name',
+  },
   fields: [
     {
       name: 'name',
@@ -26,6 +29,12 @@ export const Products: CollectionConfig = {
       type: 'relationship',
       relationTo: collectionSlugs.categories as CollectionSlug,
       hasMany: false,
+    },
+    {
+      name: 'tags',
+      type: 'relationship',
+      relationTo: collectionSlugs.tags as CollectionSlug,
+      hasMany: true,
     },
     {
       name: 'image',

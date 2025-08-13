@@ -5,7 +5,6 @@ import { Spinner } from '@/components/feature/spinner';
 import { loadProductFilters } from '@/modules/products';
 import { getQueryClient, trpc } from '@/trpc/server';
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
-import { SearchParams } from 'nuqs/server';
 import { Suspense } from 'react';
 
 type PageProps = {

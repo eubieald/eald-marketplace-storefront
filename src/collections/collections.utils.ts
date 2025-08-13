@@ -3,4 +3,5 @@ export const collectionSlugs = {
   media: 'media',
   users: 'users',
   products: 'products',
+  tags: 'tags',
 } as const;

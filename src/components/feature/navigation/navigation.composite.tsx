@@ -60,7 +60,7 @@ export const Navigation = ({
               </>
             ) : (
               <AuthenticationButtonGroup.Dashboard className="border-r border-y-0 px-12 border-l-0 h-full bg-black text-white hover:text-black rounded-none hover:bg-cyan-400 transition-colors text-lg">
-                <Link href="/dashboard">Dashboard</Link>
+                <Link href="/admin">Dashboard</Link>
               </AuthenticationButtonGroup.Dashboard>
             )}
           </AuthenticationButtonGroup>
