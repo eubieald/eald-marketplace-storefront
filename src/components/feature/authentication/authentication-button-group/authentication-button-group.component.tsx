@@ -48,7 +48,7 @@ const AuthenticationButtonDashboard = ({
       asChild
       variant="secondary"
       className={cn(
-        'flex justify-start lg:justify-normal rounded-none border-none bg-transparent text-sm font-normal',
+        'flex justify-start lg:justify-normal rounded-none border-none bg-transparent text-sm font-normal hover:bg-blue-500 hover:text-white transition-colors',
         className
       )}
     >

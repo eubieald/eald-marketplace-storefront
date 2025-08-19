@@ -27,59 +27,76 @@ export const Navigation = ({
   return (
     <>
       <WrapperDesktopBlock>
-        <nav
+        <NavigationBlock
           className={cn(
-            'h-20 flex border-b justify-between font-medium',
+            'gap-6 items-center text-sm font-medium text-gray-700',
             className
           )}
         >
-          <NavigationBlock className="gap-4 items-center">
-            {headerNavLinks.map((item, index) => (
-              <NavigationItem
-                key={index}
-                href={item.href}
-                isActive={
-                  headerProps?.pathname !== undefined &&
-                  (headerProps?.pathname === item?.href ||
-                    headerProps?.pathname.startsWith(item?.href))
-                }
-              >
-                {item.title}
-              </NavigationItem>
-            ))}
-          </NavigationBlock>
+          {headerNavLinks.map((item, index) => (
+            <NavigationItem
+              key={index}
+              href={item.href}
+              isActive={
+                headerProps?.pathname !== undefined &&
+                (headerProps?.pathname === item?.href ||
+                  headerProps?.pathname.startsWith(item?.href))
+              }
+              className="hover:text-blue-600 transition-colors"
+            >
+              {item.title}
+            </NavigationItem>
+          ))}
+
+          {/* Auth Buttons */}
           <AuthenticationButtonGroup>
             {!headerProps?.session?.user ? (
               <>
-                <AuthenticationButtonGroup.Login className="border-l bg-white border-y-0 px-12 h-full rounded-none hover:bg-cyan-400 transition-colors text-lg">
-                  <Link href="/login">Login</Link>
+                <AuthenticationButtonGroup.Login>
+                  <Link
+                    href="/login"
+                    className="rounded-full px-4 py-1.5 text-sm border hover:bg-blue-500 hover:text-white transition-colors"
+                  >
+                    Login
+                  </Link>
                 </AuthenticationButtonGroup.Login>
-                <AuthenticationButtonGroup.Register className="border-r border-y-0 px-12 border-l-0 h-full bg-black text-white hover:text-black rounded-none hover:bg-cyan-400 transition-colors text-lg">
-                  <Link href="/register">Register</Link>
+                <AuthenticationButtonGroup.Register>
+                  <Link
+                    href="/register"
+                    className="rounded-full px-4 py-1.5 text-sm border hover:bg-blue-500 hover:text-white transition-colors"
+                  >
+                    Register
+                  </Link>
                 </AuthenticationButtonGroup.Register>
               </>
             ) : (
-              <AuthenticationButtonGroup.Dashboard className="border-r border-y-0 px-12 border-l-0 h-full bg-black text-white hover:text-black rounded-none hover:bg-cyan-400 transition-colors text-lg">
-                <Link href="/admin">Dashboard</Link>
+              <AuthenticationButtonGroup.Dashboard>
+                <Link
+                  href="/admin"
+                  className="rounded-full px-4 py-1.5 text-sm border hover:bg-blue-500 hover:text-white transition-colors"
+                >
+                  Dashboard
+                </Link>
               </AuthenticationButtonGroup.Dashboard>
             )}
           </AuthenticationButtonGroup>
-        </nav>
+        </NavigationBlock>
       </WrapperDesktopBlock>
 
       <WrapperMobileBlock className="flex items-center">
         <Button
           variant="ghost"
-          className="size-12 border-transparent"
+          className="size-10 rounded-full"
           onClick={() => setIsSidebarOpen(true)}
         >
           <MenuIcon />
         </Button>
 
+        {/* Slide-up style sidebar for mobile */}
         <NavigationSidebar
           items={headerNavLinks}
           open={isSidebarOpen}
-          onOpenChange={setIsSidebarOpen}
+          onOpenChangeAction={setIsSidebarOpen}
         />
       </WrapperMobileBlock>
     </>

@@ -1,7 +1,7 @@
 export type NavigationSidebarProps = {
   items: NavigationSidebarItem[];
   open: boolean;
-  onOpenChange: (open: boolean) => void;
+  onOpenChangeAction: (open: boolean) => void;
 };
 
 export type NavigationSidebarItem = {

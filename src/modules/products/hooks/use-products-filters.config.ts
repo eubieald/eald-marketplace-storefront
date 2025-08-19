@@ -1,18 +1,33 @@
 import { useQueryStates } from 'nuqs';
-import { parseAsString, createLoader, parseAsArrayOf } from 'nuqs/server';
+import {
+  parseAsString,
+  createLoader,
+  parseAsArrayOf,
+  parseAsStringLiteral,
+} from 'nuqs/server';
+
+export const sortValues = ['relevance', 'price', 'name'] as const;
 
 export const params = {
-  minPrice: parseAsString.withOptions({
-    clearOnDefault: true,
-  }),
+  sort: parseAsStringLiteral(sortValues).withDefault('relevance'),
 
-  maxPrice: parseAsString.withOptions({
-    clearOnDefault: true,
-  }),
+  minPrice: parseAsString
+    .withOptions({
+      clearOnDefault: true,
+    })
+    .withDefault(''),
 
-  tags: parseAsArrayOf(parseAsString).withOptions({
-    clearOnDefault: true,
-  }),
+  maxPrice: parseAsString
+    .withOptions({
+      clearOnDefault: true,
+    })
+    .withDefault(''),
+
+  tags: parseAsArrayOf(parseAsString)
+    .withOptions({
+      clearOnDefault: true,
+    })
+    .withDefault([]),
 };
 
 export const useProductsFiltersConfig = () => {

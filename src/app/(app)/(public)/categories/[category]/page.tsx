@@ -12,6 +12,8 @@ type PageProps = {
   searchParams: Promise<{
     minPrice: string;
     maxPrice: string;
+    tags: string;
+    sort: 'relevance' | 'price:asc' | 'price:desc';
   }>;
 };
 

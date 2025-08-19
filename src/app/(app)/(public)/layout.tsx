@@ -1,11 +1,7 @@
-// Force dynamic rendering since we're using headers() in auth.session()
-// export const dynamic = 'force-dynamic';
-
 import {
   Header,
   HeaderLogo,
 } from '@/components/feature/header/header.component';
-// import { Navigation } from '@/components/feature/navigation';
 import { QuickSearch } from '@/components/feature/quicksearch/quicksearch.component';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
@@ -18,7 +14,6 @@ import { NavigationBoundaryClient } from '@/components/feature/navigation';
 import { headers } from 'next/headers';
 
 const PublicLayout = async ({ children }: { children: React.ReactNode }) => {
-  // NOTE: This is a server component, so we can prefetch data here
   const queryclient = getQueryClient();
   await queryclient.prefetchQuery(
     trpc.categories.getTopLevelWithChildren.queryOptions()
@@ -28,22 +23,34 @@ const PublicLayout = async ({ children }: { children: React.ReactNode }) => {
 
   return (
     <>
-      <Header className="h-20 px-4 flex flex-wrap border-b justify-between font-medium bg-blue-300">
-        <Link href="/" className=" flex items-center">
-          <HeaderLogo className={cn('font-normal font-poppins text-2xl')}>
-            EALD EC
-          </HeaderLogo>
-        </Link>
-        <NavigationBoundaryClient pathname={pathname || ''} />
-      </Header>
-      <QuickSearch />
-      <HydrationBoundary state={dehydrate(queryclient)}>
-        <Suspense fallback={<Spinner />}>
-          <TopCategoriesBlock />
-        </Suspense>
-      </HydrationBoundary>
+      <Header className={cn('backdrop-blur-md bg-blue-300 border-b shadow-sm')}>
+        <div className="flex items-center justify-between h-16 px-6">
+          <Link href="/" className="flex items-center">
+            <HeaderLogo className="font-bold text-xl tracking-tight">
+              EALD EC
+            </HeaderLogo>
+          </Link>
 
-      <main className="flex-grow">{children}</main>
+          {/* Inline Search in Header */}
+          <div className="hidden md:block flex-1 px-6">
+            <QuickSearch />
+          </div>
+
+          <NavigationBoundaryClient pathname={pathname || ''} />
+        </div>
+      </Header>
+
+      {/* Categories Bar (non-sticky) */}
+      <div className="bg-gray-50 border-b">
+        <HydrationBoundary state={dehydrate(queryclient)}>
+          <Suspense fallback={<Spinner />}>
+            <TopCategoriesBlock className="flex  gap-3 px-4 py-2 " />
+          </Suspense>
+        </HydrationBoundary>
+      </div>
+
+      {/* Content */}
+      <main className="flex-grow px-4 py-6">{children}</main>
     </>
   );
 };

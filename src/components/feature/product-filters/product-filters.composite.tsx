@@ -39,95 +39,106 @@ export const ProductFilters = ({ className }: CommonProps) => {
   } = useProductFilters();
 
   return (
-    <div className={cn('', className)}>
-      {/* Filters Header */}
-      <Column className="flex flex-row justify-between gap-2">
-        <h2 className="text-sm font-bold text-black">Filters</h2>
-        <Button
-          variant="ghost"
-          className="text-xs border-0 bg-transparent text-black"
-          onClick={resetFilters}
-        >
-          <Column className="flex flex-row gap-2">
-            <span>Reset</span>
-            <RefreshCcw className="size-4" />
-          </Column>
-        </Button>
-      </Column>
+    <aside
+      className={cn(
+        'sticky top-0 w-64 shrink-0 rounded-2xl bg-white p-4 shadow-sm border border-gray-200',
+        'dark:bg-gray-900 dark:border-gray-800',
+        className
+      )}
+    >
+      {/* inner scroll area */}
+      <div className="max-h-[calc(100vh-5rem)] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-700 scrollbar-track-transparent pr-2">
+        {/* Filters Header */}
+        <Column className="flex flex-row justify-between items-center gap-2 mb-4 bg-gray-100 px-3 py-2 rounded-xl">
+          <h2 className="text-sm font-bold text-black">Filters</h2>
+          <Button
+            variant="ghost"
+            className="text-xs border-0 bg-transparent text-black hover:text-red-600"
+            onClick={resetFilters}
+          >
+            <Column className="flex flex-row gap-1 items-center">
+              <span>Reset</span>
+              <RefreshCcw className="size-4" />
+            </Column>
+          </Button>
+        </Column>
 
-      {/* Accordion */}
-      <Accordion
-        type="single"
-        collapsible
-        className="w-full"
-        defaultValue="item-tags"
-      >
-        {/* Price Filter */}
-        <AccordionItem value="item-price">
-          <AccordionTrigger>Price</AccordionTrigger>
-          <AccordionContent className="flex flex-col gap-4 text-balance">
-            <ProductFiltersOptions.Price>
-              <Column className="flex items-start flex-col gap-2">
-                <ColumnItem className="flex flex-col gap-2 w-full">
-                  <h3>Minimum Price:</h3>
+        {/* Accordion */}
+        <Accordion
+          type="single"
+          collapsible
+          className="w-full"
+          defaultValue="item-tags"
+        >
+          {/* Price Filter */}
+          <AccordionItem value="item-price">
+            <AccordionTrigger className="rounded-md  text-black px-3 py-2">
+              Price
+            </AccordionTrigger>
+            <AccordionContent className="flex flex-col gap-4 mt-2">
+              <ProductFiltersOptions.Price>
+                <div className="flex items-center gap-2">
                   <Input
                     type="text"
                     placeholder="₱0"
                     value={minPrice ? formatAsCurrency(minPrice) : ''}
                     onChange={handleMinPriceChange}
+                    className="bg-white dark:bg-gray-800 max-h-[2.125rem]"
                   />
-                </ColumnItem>
-                <ColumnItem className="flex flex-col gap-2 w-full">
-                  <h3>Maximum Price:</h3>
+                  <span className="text-gray-500 dark:text-gray-400">~</span>
                   <Input
                     type="text"
                     placeholder="∞"
                     value={maxPrice ? formatAsCurrency(maxPrice) : ''}
                     onChange={handleMaxPriceChange}
+                    className="bg-white dark:bg-gray-800 max-h-[2.125rem]"
                   />
-                </ColumnItem>
-              </Column>
-            </ProductFiltersOptions.Price>
-          </AccordionContent>
-        </AccordionItem>
+                </div>
+              </ProductFiltersOptions.Price>
+            </AccordionContent>
+          </AccordionItem>
 
-        {/* Tags Filter */}
-        <AccordionItem value="item-tags">
-          <AccordionTrigger>Tags</AccordionTrigger>
-          <AccordionContent>
-            <ProductFiltersOptions.Tags>
-              <Column className="flex items-start flex-col gap-2">
-                <ColumnItem className="flex flex-col gap-2 w-full">
+          {/* Tags Filter */}
+          <AccordionItem value="item-tags">
+            <AccordionTrigger className="rounded-md  text-black px-3 py-2">
+              Tags
+            </AccordionTrigger>
+            <AccordionContent className="mt-2">
+              <ProductFiltersOptions.Tags>
+                <Column className="flex flex-col gap-3">
                   {isLoading ? (
-                    <div className="flex items-center justify-center">
+                    <div className="flex items-center justify-center py-4">
                       <LoaderIcon className="animate-spin" />
                     </div>
                   ) : (
                     <>
-                      {data?.pages?.map((page) =>
-                        page?.docs?.map((tagData) => {
-                          const tag = tagData as Tag;
-                          return (
-                            <Column
-                              key={tag.id}
-                              className="flex flex-row items-center gap-5"
-                            >
-                              <p>{tag.name}</p>
-                              <Checkbox
-                                checked={filters.tags?.includes(tag?.name)}
-                                onCheckedChange={() =>
-                                  onTagsOptionClick(tag?.name)
-                                }
-                                className="ml-auto"
-                              />
-                            </Column>
-                          );
-                        })
-                      )}
+                      <div className="flex flex-wrap gap-2">
+                        {data?.pages?.map((page) =>
+                          page?.docs?.map((tagData) => {
+                            const tag = tagData as Tag;
+                            const isChecked = filters.tags?.includes(tag?.name);
+                            return (
+                              <button
+                                key={tag.id}
+                                type="button"
+                                onClick={() => onTagsOptionClick(tag?.name)}
+                                className={cn(
+                                  'px-3 py-1 rounded-full border text-sm transition-all',
+                                  isChecked
+                                    ? 'bg-blue-600 text-white border-blue-600'
+                                    : 'bg-blue-100 text-black border-blue-200 hover:bg-blue-200'
+                                )}
+                              >
+                                {tag.name}
+                              </button>
+                            );
+                          })
+                        )}
+                      </div>
 
                       {hasNextPage && (
                         <Button
-                          className="w-full cursor-pointer"
+                          className="w-full cursor-pointer mt-3 bg-blue-300 text-black hover:bg-blue-400"
                           onClick={() => fetchNextPage()}
                           disabled={!hasNextPage || isFetchingNextPage}
                         >
@@ -136,12 +147,12 @@ export const ProductFilters = ({ className }: CommonProps) => {
                       )}
                     </>
                   )}
-                </ColumnItem>
-              </Column>
-            </ProductFiltersOptions.Tags>
-          </AccordionContent>
-        </AccordionItem>
-      </Accordion>
-    </div>
+                </Column>
+              </ProductFiltersOptions.Tags>
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
+      </div>
+    </aside>
   );
 };
