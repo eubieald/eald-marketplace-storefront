@@ -25,8 +25,6 @@
 
 ## 📸 Screenshots
 
-> Replace the links below with your real screenshots or GIFs for higher engagement!
-
 ![Storefront Home Page](https://via.placeholder.com/800x400?text=Storefront+Home+Page)
 ![Product Listing Page](https://via.placeholder.com/800x400?text=Product+Listing+Page)
 ![Checkout Flow](https://via.placeholder.com/800x400?text=Checkout+Flow)
