@@ -1,17 +1,13 @@
 ````md
-<h1 align="center">🛒 EALD Marketplace Storefront</h1>
+# 🛒 EALD Marketplace Storefront
 
-<p align="center">
-  A multi-tenant e-commerce storefront built with Next.js — fully customizable, scalable, and developer-friendly.
-</p>
+> A multi-tenant e-commerce storefront built with Next.js — fully customizable, scalable, and developer-friendly.
 
-<p align="center">
-  <img src="https://img.shields.io/github/license/eubieald/eald-marketplace-storefront" />
-  <img src="https://img.shields.io/github/languages/top/eubieald/eald-marketplace-storefront" />
-  <img src="https://img.shields.io/github/last-commit/eubieald/eald-marketplace-storefront" />
-  <img src="https://img.shields.io/badge/Next.js-14.x-blue.svg" />
-  <img src="https://img.shields.io/badge/TypeScript-%F0%9F%91%8D-blue" />
-</p>
+[![License](https://img.shields.io/github/license/eubieald/eald-marketplace-storefront)](https://github.com/eubieald/eald-marketplace-storefront/blob/main/LICENSE)
+[![Top Language](https://img.shields.io/github/languages/top/eubieald/eald-marketplace-storefront)](https://github.com/eubieald/eald-marketplace-storefront)
+[![Last Commit](https://img.shields.io/github/last-commit/eubieald/eald-marketplace-storefront)](https://github.com/eubieald/eald-marketplace-storefront/commits/main)
+[![Next.js](https://img.shields.io/badge/Next.js-14.x-blue.svg)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-%F0%9F%91%8D-blue)](https://www.typescriptlang.org/)
 
 ---
 
@@ -29,13 +25,11 @@
 
 ## 📸 Screenshots
 
-<p float="left">
-  <img src="https://via.placeholder.com/800x400?text=Storefront+Home+Page" width="100%" />
-  <img src="https://via.placeholder.com/800x400?text=Product+Listing+Page" width="100%" />
-  <img src="https://via.placeholder.com/800x400?text=Checkout+Flow" width="100%" />
-</p>
+> Replace the links below with your real screenshots or GIFs for higher engagement!
 
-> *Replace these with real screenshots or Loom GIFs for higher engagement!*
+![Storefront Home Page](https://via.placeholder.com/800x400?text=Storefront+Home+Page)
+![Product Listing Page](https://via.placeholder.com/800x400?text=Product+Listing+Page)
+![Checkout Flow](https://via.placeholder.com/800x400?text=Checkout+Flow)
 
 ---
 
@@ -48,15 +42,15 @@
 
 ## 🛠️ Tech Stack
 
-| Layer         | Tech                                 |
-|--------------|--------------------------------------|
-| Framework     | [Next.js](https://nextjs.org)       |
-| Language      | TypeScript                          |
-| Styling       | Tailwind CSS (or insert actual used) |
-| State / Data  | React Query / SWR / Context API     |
-| Auth          | NextAuth.js / Custom Auth           |
-| DB / ORM      | Prisma / PostgreSQL (optional)      |
-| Deployment    | Vercel / Netlify / Docker           |
+| Layer       | Technology                                      |
+|-------------|------------------------------------------------|
+| Framework   | [Next.js](https://nextjs.org)                   |
+| Language    | TypeScript                                      |
+| Styling     | Tailwind CSS (or your styling solution)         |
+| State/Data  | React Query / SWR / Context API                  |
+| Authentication | NextAuth.js / Custom Auth                      |
+| Database/ORM | Prisma / PostgreSQL (optional)                   |
+| Deployment  | Vercel / Netlify / Docker                        |
 
 ---
 
@@ -77,7 +71,7 @@ npm install
 
 ### 🔐 Environment Setup
 
-Create `.env.local` in the root:
+Create a `.env.local` file in the root folder with your environment variables:
 
 ```env
 NEXT_PUBLIC_API_URL=https://api.mysite.com
@@ -91,7 +85,7 @@ JWT_SECRET=supersecretkey
 npm run dev
 ```
 
-Then visit: [http://localhost:3000](http://localhost:3000)
+Then open your browser at [http://localhost:3000](http://localhost:3000)
 
 ---
 
@@ -123,43 +117,44 @@ src/
 
 ## 📦 Deployment
 
-1. Push to GitHub
-2. Connect repo to [Vercel](https://vercel.com)
-3. Set environment variables
-4. Deploy 🚀
+1. Push your code to GitHub
+2. Connect the repo to [Vercel](https://vercel.com) or your hosting provider
+3. Set your environment variables in the hosting dashboard
+4. Deploy and enjoy! 🚀
 
 ---
 
 ## 🤝 Contributing
 
-Contributions are welcome!
+Contributions are welcome! To contribute:
 
 ```bash
 # Fork the repo
-git checkout -b feature/feature-name
-git commit -m "Add awesome feature"
-git push origin feature/feature-name
+git checkout -b feature/your-feature-name
+git commit -m "Add some feature"
+git push origin feature/your-feature-name
 ```
 
-Then open a **Pull Request** 🚀
+Then open a Pull Request on GitHub.
+Please follow coding guidelines, write tests, and update docs if needed.
 
 ---
 
 ## 🪪 License
 
 This project is licensed under the **MIT License**.
-See [LICENSE](./LICENSE) for details.
+See the [LICENSE](./LICENSE) file for details.
 
 ---
 
 ## 🙏 Acknowledgments
 
-* [Next.js Docs](https://nextjs.org/docs)
-* [ShadCN UI](https://ui.shadcn.dev/) *(if used)*
+* [Next.js Documentation](https://nextjs.org/docs)
 * [Tailwind CSS](https://tailwindcss.com/)
+* [React Query](https://react-query.tanstack.com/)
 ---
 
-> ⭐ **Star this repo** to support the project!
-> 💬 Feel free to open issues or pull requests anytime.
+⭐ **If you find this project helpful, please consider starring it!**
 
+---
 ```
