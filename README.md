@@ -1,36 +1,165 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+````md
+<h1 align="center">🛒 EALD Marketplace Storefront</h1>
 
-## Getting Started
+<p align="center">
+  A multi-tenant e-commerce storefront built with Next.js — fully customizable, scalable, and developer-friendly.
+</p>
 
-First, run the development server:
+<p align="center">
+  <img src="https://img.shields.io/github/license/eubieald/eald-marketplace-storefront" />
+  <img src="https://img.shields.io/github/languages/top/eubieald/eald-marketplace-storefront" />
+  <img src="https://img.shields.io/github/last-commit/eubieald/eald-marketplace-storefront" />
+  <img src="https://img.shields.io/badge/Next.js-14.x-blue.svg" />
+  <img src="https://img.shields.io/badge/TypeScript-%F0%9F%91%8D-blue" />
+</p>
+
+---
+
+## ✨ Features
+
+- 🏬 Multi-tenant storefronts (vendor-based separation)
+- 🔎 Product search, filtering, and categories
+- 🛒 Shopping cart & checkout flow
+- 👤 User login, registration & sessions
+- 🎨 Customizable themes & layouts (WIP)
+- 📈 Admin & vendor dashboards
+- ⚡ Built with modern tech (Next.js + TypeScript)
+
+---
+
+## 📸 Screenshots
+
+<p float="left">
+  <img src="https://via.placeholder.com/800x400?text=Storefront+Home+Page" width="100%" />
+  <img src="https://via.placeholder.com/800x400?text=Product+Listing+Page" width="100%" />
+  <img src="https://via.placeholder.com/800x400?text=Checkout+Flow" width="100%" />
+</p>
+
+> *Replace these with real screenshots or Loom GIFs for higher engagement!*
+
+---
+
+## 🚀 Live Demo
+
+> 🟢 **Coming Soon!**  
+> Will be hosted on [Vercel](https://vercel.com/) or [Netlify](https://netlify.com/).
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer         | Tech                                 |
+|--------------|--------------------------------------|
+| Framework     | [Next.js](https://nextjs.org)       |
+| Language      | TypeScript                          |
+| Styling       | Tailwind CSS (or insert actual used) |
+| State / Data  | React Query / SWR / Context API     |
+| Auth          | NextAuth.js / Custom Auth           |
+| DB / ORM      | Prisma / PostgreSQL (optional)      |
+| Deployment    | Vercel / Netlify / Docker           |
+
+---
+
+## ⚙️ Getting Started
+
+### ✅ Prerequisites
+
+- Node.js v16+
+- npm / Yarn / pnpm
+
+### 📦 Installation
+
+```bash
+git clone https://github.com/eubieald/eald-marketplace-storefront.git
+cd eald-marketplace-storefront
+npm install
+````
+
+### 🔐 Environment Setup
+
+Create `.env.local` in the root:
+
+```env
+NEXT_PUBLIC_API_URL=https://api.mysite.com
+DATABASE_URL=postgresql://user:password@localhost:5432/eald
+JWT_SECRET=supersecretkey
+```
+
+### 🧪 Development
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then visit: [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📁 Project Structure
 
-## Learn More
+```
+src/
+├── components/      # Reusable UI components
+├── pages/           # Next.js routes
+├── lib/             # API utilities & helpers
+├── context/         # React context providers
+├── styles/          # Global and module styles
+└── types/           # TypeScript types
+```
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🧾 Available Scripts
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Command  | Description                  |
+| -------- | ---------------------------- |
+| `dev`    | Start dev server (localhost) |
+| `build`  | Create production build      |
+| `start`  | Start production server      |
+| `lint`   | Run ESLint                   |
+| `format` | Format code with Prettier    |
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📦 Deployment
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Push to GitHub
+2. Connect repo to [Vercel](https://vercel.com)
+3. Set environment variables
+4. Deploy 🚀
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome!
+
+```bash
+# Fork the repo
+git checkout -b feature/feature-name
+git commit -m "Add awesome feature"
+git push origin feature/feature-name
+```
+
+Then open a **Pull Request** 🚀
+
+---
+
+## 🪪 License
+
+This project is licensed under the **MIT License**.
+See [LICENSE](./LICENSE) for details.
+
+---
+
+## 🙏 Acknowledgments
+
+* [Next.js Docs](https://nextjs.org/docs)
+* [ShadCN UI](https://ui.shadcn.dev/) *(if used)*
+* [Tailwind CSS](https://tailwindcss.com/)
+---
+
+> ⭐ **Star this repo** to support the project!
+> 💬 Feel free to open issues or pull requests anytime.
+
+```
