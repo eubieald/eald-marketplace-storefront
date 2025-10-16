@@ -17,11 +17,11 @@ import { usePathname } from 'next/navigation';
 export const NavigationSidebar = ({
   items,
   open,
-  onOpenChange,
+  onOpenChangeAction,
 }: NavigationSidebarProps) => {
   const pathname = usePathname();
   return (
-    <Sheet open={open} onOpenChange={onOpenChange}>
+    <Sheet open={open} onOpenChange={onOpenChangeAction}>
       <SheetHeader className="hidden lg:flex">
         {/* NOTE: Added this even not used because it is required by sheet component */}
         <SheetTitle />
